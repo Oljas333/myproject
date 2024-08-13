@@ -8,9 +8,20 @@ from telebot.sendmessage import sendTelegram
 # Create your views here.
 def first_page(request):
     slider_list = CmsSlider.objects.all()
-    pc_1 = PriceCard.objects.get(pk=1)
-    pc_2 = PriceCard.objects.get(pk=2)
-    pc_3 = PriceCard.objects.get(pk=3)
+    try:
+        pc_1 = PriceCard.objects.get(pk=1)
+    except PriceCard.DoesNotExist:
+        pc_1 = None
+
+    try:
+        pc_2 = PriceCard.objects.get(pk=2)
+    except PriceCard.DoesNotExist:
+        pc_2 = None
+
+    try:
+        pc_3 = PriceCard.objects.get(pk=3)
+    except PriceCard.DoesNotExist:
+        pc_3 = None
     price_table = PriceTable.objects.all()
     form = OrderForm()
     dict_obj = { 'slider_list': slider_list,
